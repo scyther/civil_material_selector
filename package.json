@@ -1,0 +1,42 @@
+{
+  "name": "building-material-selector-india",
+  "version": "1.0.0",
+  "description": "AI-Powered Building Material Selector for Indian Construction Industry - Civil Engineers and Architects",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.13.0",
+    "autoprefixer": "10.4.19",
+    "dompurify": "^3.1.5",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.4",
+    "html-react-parser": "^5.1.10",
+    "next": "14.2.4",
+    "postcss": "8.4.38",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "3.4.4"
+  },
+  "keywords": [
+    "building materials",
+    "construction",
+    "civil engineering",
+    "architecture",
+    "material selection",
+    "AI",
+    "india",
+    "indian construction",
+    "NBC 2016",
+    "IS codes",
+    "monsoon",
+    "seismic zone",
+    "GRIHA",
+    "IGBC"
+  ],
+  "author": "Building Material Selector India Team"
+}
