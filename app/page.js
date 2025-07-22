@@ -11,6 +11,8 @@ export default function Home() {
     projectType: '',
     climate: '',
     budget: '',
+    area: '',
+    expectedBudget: '',
     duration: '',
     location: '',
     structuralRequirements: '',
@@ -36,15 +38,17 @@ export default function Home() {
         Project Type: ${projectData.projectType}
         Climate Zone: ${projectData.climate}
         Budget Range: ${projectData.budget}
+        Project Area: ${projectData.area} sq ft
+        Expected Total Budget: ₹${projectData.expectedBudget ? Number(projectData.expectedBudget).toLocaleString('en-IN') : 'Not specified'}
         Project Duration: ${projectData.duration}
         Location: ${projectData.location}
         Structural Requirements: ${projectData.structuralRequirements}
         Sustainability Goals: ${projectData.sustainabilityGoals}
         Additional Constraints: ${projectData.additionalConstraints}
         
-        Please provide a detailed analysis considering Indian context:
+        Please provide a detailed analysis considering Indian context and the specific area (${projectData.area} sq ft) and budget (₹${projectData.expectedBudget ? Number(projectData.expectedBudget).toLocaleString('en-IN') : 'Not specified'}):
         1. Top 3 recommended materials for each major component (foundation, structure, roofing, insulation, finishing) with Indian brands and suppliers
-        2. Cost analysis in INR with current market rates
+        2. Cost analysis in INR with current market rates, including per sq ft breakdown based on the ${projectData.area} sq ft area
         3. Environmental impact assessment considering Indian climate
         4. Durability and maintenance in Indian conditions (monsoon, heat, humidity)
         5. Local availability and supplier recommendations across India
@@ -258,6 +262,46 @@ Compliant with NBC 2016 and Indian Building Standards`;
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Project Area <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="number"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="e.g., 1200, 2500, 5000"
+                  value={projectData.area}
+                  onChange={(e) => handleInputChange('area', e.target.value)}
+                  min="100"
+                  max="1000000"
+                  required
+                />
+                <p className="text-xs text-gray-500 mt-1">Enter project area in square feet (minimum 100 sq ft)</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Expected Total Budget <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="number"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="e.g., 1500000, 5000000, 10000000"
+                  value={projectData.expectedBudget}
+                  onChange={(e) => handleInputChange('expectedBudget', e.target.value)}
+                  min="50000"
+                  required
+                />
+                <p className="text-xs text-gray-500 mt-1">Enter total project budget in INR (minimum ₹50,000)</p>
+                {projectData.area && projectData.expectedBudget && (
+                  <div className="mt-2 p-2 bg-green-50 border border-green-200 rounded-md">
+                    <p className="text-sm text-green-700">
+                      <span className="font-medium">Calculated budget per sq ft:</span> ₹{Math.round(projectData.expectedBudget / projectData.area).toLocaleString('en-IN')}/sq ft
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Project Duration
                 </label>
                 <input
@@ -323,7 +367,7 @@ Compliant with NBC 2016 and Indian Building Standards`;
 
               <button
                 onClick={handleAnalyze}
-                disabled={isLoading || !projectData.projectType || !projectData.climate}
+                disabled={isLoading || !projectData.projectType || !projectData.climate || !projectData.area || !projectData.expectedBudget}
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
               >
                 {isLoading ? 'Analyzing...' : 'Generate Material Analysis Report'}

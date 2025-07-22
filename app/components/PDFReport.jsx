@@ -51,6 +51,8 @@ const PDFReport = React.forwardRef(({ projectData, materialReport }, ref) => {
           <div><strong>Project Type:</strong> {projectData.projectType || 'N/A'}</div>
           <div><strong>Climate Zone:</strong> {projectData.climate || 'N/A'}</div>
           <div><strong>Budget Range:</strong> {projectData.budget || 'N/A'}</div>
+          <div><strong>Project Area:</strong> {projectData.area ? `${Number(projectData.area).toLocaleString('en-IN')} sq ft` : 'N/A'}</div>
+          <div><strong>Expected Budget:</strong> {projectData.expectedBudget ? `₹${Number(projectData.expectedBudget).toLocaleString('en-IN')}` : 'N/A'}</div>
           <div><strong>Duration:</strong> {projectData.duration || 'N/A'}</div>
           <div><strong>Location:</strong> {projectData.location || 'N/A'}</div>
           <div><strong>Sustainability Goals:</strong> {projectData.sustainabilityGoals || 'N/A'}</div>

@@ -35,7 +35,7 @@ const ProjectSummary = ({ projectData }) => {
         return budgets[budget] || budget;
     };
 
-    if (!projectData.projectType && !projectData.climate) {
+    if (!projectData.projectType && !projectData.climate && !projectData.area && !projectData.expectedBudget) {
         return null;
     }
 
@@ -57,8 +57,20 @@ const ProjectSummary = ({ projectData }) => {
                 )}
                 {projectData.budget && (
                     <div>
-                        <span className="font-medium text-blue-700">Budget:</span>
+                        <span className="font-medium text-blue-700">Budget Range:</span>
                         <span className="ml-2 text-blue-600">{formatBudget(projectData.budget)}</span>
+                    </div>
+                )}
+                {projectData.area && (
+                    <div>
+                        <span className="font-medium text-blue-700">Project Area:</span>
+                        <span className="ml-2 text-blue-600">{Number(projectData.area).toLocaleString('en-IN')} sq ft</span>
+                    </div>
+                )}
+                {projectData.expectedBudget && (
+                    <div>
+                        <span className="font-medium text-blue-700">Expected Budget:</span>
+                        <span className="ml-2 text-blue-600">₹{Number(projectData.expectedBudget).toLocaleString('en-IN')}</span>
                     </div>
                 )}
                 {projectData.location && (

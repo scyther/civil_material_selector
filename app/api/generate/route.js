@@ -133,7 +133,17 @@ export async function POST(req, res) {
                 }
             }
 
-            Include specific Indian brand names, IS codes, NBC references, and current market rates in INR. Consider regional variations and local construction practices. Return ONLY the JSON object, no additional text or formatting.
+            Include specific Indian brand names, IS codes, NBC references, and current market rates in INR. Consider regional variations and local construction practices.
+            
+            IMPORTANT: If the user has provided project area and expected budget in the prompt, ensure that:
+            1. Cost calculations are based on the specified area (sq ft)
+            2. Material quantities are calculated for the given area
+            3. Total cost estimates align with or provide alternatives for the expected budget
+            4. Per sq ft costs are clearly broken down
+            5. Budget optimization suggestions are provided if the expected budget is tight
+            6. Alternative material options are suggested for different budget scenarios
+            
+            Return ONLY the JSON object, no additional text or formatting.
         `;
 
         const result = await model.generateContent(enhancedPrompt);
